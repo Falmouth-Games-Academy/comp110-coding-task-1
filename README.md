@@ -9,3 +9,5 @@ A client-server database system to support a mobile game app.
 4 | update user names |
 5 | insert new high scores |
 6 | update high scores |
+
+Started working on a few of them but server won't work through a web browser so can't test it.
