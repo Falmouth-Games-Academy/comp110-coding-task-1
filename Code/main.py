@@ -9,24 +9,28 @@ import cgitb
 cgitb.enable()
 
 
-class HTTPApp(App):
+class LeaderboardApp(App):
+    global textinput
     def build(self):
         layout = GridLayout(rows=5)
         btn = Button(text='Button', font_size=120)
         btn.bind(on_press=self.callback)
         self.label = Label(text="------------", font_size='50sp')
-        input1 = TextInput
+
+        textinput = TextInput(text='Please enter a 3 letter username', multiline=False)
+        #textinput.bind(text=on_text)
+
         layout.add_widget(btn)
         layout.add_widget(self.label)
-        layout.add_widget(input1)
+        layout.add_widget(textinput)
         return layout
 
     def got_weather(self, request, results):
         self.label.text = results
 
-    def callback(self, event,):
-        print("button touched")  # test
+    def callback(self, textinput):
+        #player_name = textinput.text
         self.label.text = "Loading"
-        request = UrlRequest('http://bsccg04.ga.fal.io/kivy_app/?player=', self.got_weather)
+        request = UrlRequest('http://bsccg04.ga.fal.io/kivy_app/?player_name=ABC', self.got_weather)
 
-HTTPApp().run()
+LeaderboardApp().run()
