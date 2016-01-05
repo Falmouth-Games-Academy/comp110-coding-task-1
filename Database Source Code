@@ -148,6 +148,19 @@ c = conn.cursor()
 c.execute("INSERT INTO example VALUES (" + my_first_int _ ", ' " + my_first_str + "', 'Users')")
 c.execute("INSERT INTO example VALUES (2, 'Two!')")
 
+#Get some example data
+sql = "SELECT 'first_name', 'last_name', 'score' 
+FROM scores 
+ORDER BY scores DESC
+LIMIT 0, 10"
+
+
+c.execute(sql, ("url.ac.uk",))
+results = cursor.fetchall()
+print(result)
+
+connection.close()
+
 ######################################################################################################
 
 #test json - NOT WORKING
