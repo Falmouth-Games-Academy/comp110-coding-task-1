@@ -145,5 +145,18 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 #Insert some example data - Having some problem with this as my database says there is an error.
-c.execute("INSERT INTO numbers VALUES (" + my_first_int _ ", ' " + my_first_str + "', 'Users')")
-c.execute("INSERT INTO numbers VALUES (2, 'Two!')")
+c.execute("INSERT INTO example VALUES (" + my_first_int _ ", ' " + my_first_str + "', 'Users')")
+c.execute("INSERT INTO example VALUES (2, 'Two!')")
+
+######################################################################################################
+
+#test json - NOT WORKING
+#Highscore
+import json
+
+cursor.execute("""
+  SELECT player.first_name, player.last_name, scores.score
+  FROM scores
+  """)
+
+print json.dump(scores)
