@@ -104,6 +104,16 @@ ON player_id
 INNER JOIN levels
 ON level_id = levels.id;
 
+#############################################################################
+
+#test for highscore of top 10 scores
+
+SELECT player.first_name, player.last_name, scores.score
+FROM scores
+#how to I arrange and update player.id to be whos score is highest
+WHERE player.id <= 10
+ORDER BY score;
+
 ###############################################################################
 
 #!/usr/bin/python
