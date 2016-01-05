@@ -161,6 +161,22 @@ print(result)
 
 connection.close()
 
+#########################################################################
+
+#https://scriptingmysql.wordpress.com/2011/09/09/retrieving-data-from-mysql-via-python/
+
+import MySQLdb
+import sys
+
+cursor = connection.cursor ()
+cursor.execute (select first_name, last_name from scores")
+
+data = cursor.fetchall ()
+print row[0], row[1]
+cursor.close ()
+connection.close ()
+sys.exit ()
+
 ######################################################################################################
 
 #test json - NOT WORKING
