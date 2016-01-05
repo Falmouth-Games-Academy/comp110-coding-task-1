@@ -1,3 +1,105 @@
+#sign in
+mysql - u root -p
+#enter password
+
+show databases;
+
+use example;
+
+shows tables;
+
+show numbers;
+
+show users;
+
+show tables;
+
+CREATE TABLE levels
+(
+id INT,
+level_name VARCHAR(30)
+);
+
+CREATE TABLE scores
+(
+player_id INT,
+level_id INT,
+score INT
+);
+
+CREATE TABLE players
+(
+id INT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+PRIMARY KEY(ID)
+);
+
+describe players;
+
+SELECT * FROM players;
+
+INSERT INTO players VALUES
+(
+null,
+'Doug'
+'Brown'
+);
+
+SELECT * FROM players;
+
+describe levels;
+
+ALTER TABLE levels
+ADD PRIMARY KEY(id);
+
+ALTER TABLE scores
+ADD PRIMARY KEY(player_id, level_id);
+
+describe scores;
+
+ALTER TABLE levels
+MODIFY COLUMN id INT NOT NULL AUTO_INCREMEMNT;
+
+describe levels;
+
+INSERT INTO scores VALUES
+(
+1,
+1,
+100
+);
+
+INSERT INTO scores VALUES ( 1,2, 300);
+
+SELECT * FROM scores;
+
+SELECT first_name, last_name FROM players WHERE id = '1';
+
+SELECT players.first_name, levels.level_name, scores.score
+FROM scores
+INNER JOIN players
+ON player_id = players.id
+INNER JOIN levels
+ON level_id = levels.id;
+
+SELECT * FROM scores;
+
+UPDATE scores
+SET scores = 400
+WHERE player_id = 1 AND level_id = 1;
+
+SELECT * FROM scores;
+
+SELECT players.first_name, levels.level_name, scores.score 
+FROM scores
+INNER JOIN players
+ON player_id
+INNER JOIN levels
+ON level_id = levels.id;
+
+###############################################################################
+
 #!/usr/bin/python
 
 #Turn on debug mode.
