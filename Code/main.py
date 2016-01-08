@@ -30,7 +30,7 @@ class LeaderboardApp(App):
 
     def callback(self, textinput):
         #player_name = textinput.text
-        self.label.text = "Loading"
-        request = UrlRequest('http://bsccg04.ga.fal.io/kivy_app/?player_name=ABC', self.got_weather)
+        self.label.text = "Searching"
+        request = UrlRequest('http://http://bsccg04.ga.fal.io/top10.py', self.got_weather)
 
 LeaderboardApp().run()
