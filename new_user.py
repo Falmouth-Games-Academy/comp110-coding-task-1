@@ -1,3 +1,4 @@
+
 #!/usr/bin/python
 
 # Turn on debug mode.
@@ -17,6 +18,16 @@ conn = pymysql.connect(
 
 c = conn.cursor()
 
+import cgi
+Form = cgi.Fieldstorage()
+
+if "playername" not in form:
+        print("Something went wrong")
+Else
+         print ("hello" + str.getvalue("user"))
+
+playername = self.request.get('player_name')
+
 # Insert some example data.
 c.execute("INSERT INTO players(name) VALUES ('pl5')")
 conn.commit()
@@ -24,3 +35,4 @@ conn.commit()
 # Print the contents of the database.
 c.execute("SELECT * FROM players")
 print([(r[0], r[1]) for r in c.fetchall()])
+
