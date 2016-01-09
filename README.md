@@ -8,6 +8,6 @@ A client-server database system to support a mobile game app.
 3 | insert new users | x
 4 | update user names |
 5 | insert new high scores | x
-6 | update high scores |
+6 | update high scores | X
 
-Started working on a few of them but server won't work through a web browser so can't test it.
+I have made a few of them but none of them seem to work.
