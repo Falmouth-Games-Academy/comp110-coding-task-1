@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 # Turn on debug mode.
 
@@ -20,7 +19,5 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 # Print the top 10 scores in the database.
-c.execute("SELECT * FROM scores"
-        "ORDER BY score DESC")
-print([(r[0], r[1]) for r in c.fetchall()])
-
+c.execute("SELECT * FROM scores ORDER BY score DESC")
+print([(r[0], r[1], r[2]) for r in c.fetchall()])

@@ -1,13 +1,12 @@
-
-
 #!/usr/bin/python
-
 # Turn on debug mode.
-import cgitb
+
+import cgi, cgitb
 cgitb.enable()
 
 # Print necessary headers.
-print(“Content-Type: text/html; charset=utf-8\n\n”)
+print("Content-Type: text/html; charset=utf-8\n\n")
+print()
 
 # Connect to the database.
 import pymysql
@@ -20,24 +19,26 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 #import cgi
-#Form = cgi.Fieldstorage()
+form = cgi.FieldStorage()
+playername = str(form.getvalue('playername'))
 
-#if "playername" not in form:
-#        print("Something went wrong")
-#Else
-#         print ("hello" + str.getvalue("user"))
+if "playername" not in form:
+        print("Error")
+if "level" not in form:
+		print("Error")
+if "score" not in form:
+		print("Error")	
+else:
+        print ("Hello " + str(playername))
 
-#playername = self.request.get('player_name')
-#level = self.request.get('level')
-#score = self.request.get('score')
 
-# Insert some example data.
+# Insert new user
 c.execute("UPDATE scores"
-        "SET score = 1"
-        "WHERE player_ID=1 AND level_ID=1")
+        "SET score = "score""
+        "WHERE player_ID="PID" AND level_ID="LID"")
 conn.commit()
+
 
 # Print the contents of the database.
 c.execute("SELECT * FROM scores")
-print([(r[0], r[1]) for r in c.fetchall()])
-
+print([(r[0], r[1], r[2]) for r in c.fetchall()])
