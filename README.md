@@ -1,8 +1,6 @@
 # comp110-coding-task-1
 A client-server database system to support a mobile game app.
 
-I've started on a few of them but none of them seem to work.
-
  | Requirement | Done
 --- | --- | ---
 1 | retrieve the top 10 | x
