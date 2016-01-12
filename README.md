@@ -10,4 +10,4 @@ A client-server database system to support a mobile game app.
 5 | insert new high scores | x
 6 | update high scores | X
 
-I have made a few of them but none of them seem to work.
+
