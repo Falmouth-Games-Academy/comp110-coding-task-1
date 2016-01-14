@@ -25,17 +25,20 @@ playername = str(form.getvalue('playername'))
 if "playername" not in form:
         print("Error")
 if "level" not in form:
-		print("Error")
+                print("Error")
 if "score" not in form:
-		print("Error")	
+                print("Error")
 else:
         print ("Hello " + str(playername))
 
+score =form.getvalue('score')
+player = str(form.getvalue('playername'))
+level = form.getvalue('level')
+
 
 # Insert new user
-c.execute("UPDATE scores"
-        "SET score = "score""
-        "WHERE player_ID="PID" AND level_ID="LID"")
+c.execute("SELECT * FROM players WHERE player LIKE name")
+c.execute("UPDATE scores SET score = " + score +" WHERE player_ID = " +playerID + " AND level_ID = "+ level +" ")
 conn.commit()
 
 

@@ -2,7 +2,9 @@
 # Turn on debug mode.
 
 import cgitb
+
 cgitb.enable()
+
 
 # Print necessary headers.
 print("Content-Type: text/html; charset=utf-8\n\n")
@@ -20,4 +22,6 @@ c = conn.cursor()
 
 # Print the top 10 scores in the database.
 c.execute("SELECT * FROM scores ORDER BY score DESC")
+print ("<b>Top 10 scores</b>")
+print ("<br />")
 print([(r[0], r[1], r[2]) for r in c.fetchall()])

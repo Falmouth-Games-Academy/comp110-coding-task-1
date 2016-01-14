@@ -20,16 +20,18 @@ c = conn.cursor()
 
 form = cgi.FieldStorage()
 playername = str(form.getvalue('playername'))
+newname = str(form.getvalue('newname'))
 
-if "playername" not in form:
+if "playername" not in form or "newname" not in form:
         print("Error")
 else:
-        print ("Hello " + playername + "<br />")
+        print ("Hello " + newname)
 
 # Insert new user
-c.execute("INSERT INTO players VALUES (NULL,'" + playername + "')")
+c.execute("UPDATE players SET name = '"+ newname +"' WHERE  name = '" + playername + "'")
 conn.commit()
 
 # Print the contents of the database.
+print("<br />")
 c.execute("SELECT * FROM players")
 print([(r[0], r[1]) for r in c.fetchall()])
