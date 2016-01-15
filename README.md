@@ -2,7 +2,8 @@
 A client-server database system to support a mobile game app.
 
 #Done
--top highscore
--top 10 highscores
--insert user
+-top highscore  
+-top 10 highscores  
+-insert user  
 
+Kivy app uses callback
