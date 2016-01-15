@@ -22,14 +22,18 @@ c = conn.cursor()
 
 
 #Get some example data
-sql = "SELECT 'first_name', 'last_name', 'score' 
+c.execute = ("SELECT players.first_name, players.last_name, scores.score 
 FROM scores 
+INNER JOIN players
+ON player_id = players.id
 ORDER BY scores DESC
 LIMIT 0, 10"
 
-
-c.execute(sql, ("bsccg03.ga.fal.io/",))
-results = c.fetchall()
-print(result)
+score_table = ([(r[0], r[1], r[2]) for r in c.fetchall()])
+print(score_table)
 
 connection.close()
+
+
+
+
