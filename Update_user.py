@@ -11,6 +11,10 @@ print("Content-Type: text/html; charset=utf-8\n\n")
 #Connect to the database.
 import cgi
 form = cgi.FieldStorage()
+if "player" not in form or "newplayer" not in form:
+  print "Error"
+else:
+  print ("Hello" form["player"].value)
   
 #Connect to the database.
 import pymysql
@@ -22,7 +26,7 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 #Insert some example data - Having some problem with this as my database says there is an error.
-c.execute("UPDATE players SET player.first_name = "newuser" WHERE player.first_name = "user")
+c.execute("UPDATE players SET player.first_name = "newplayer" WHERE player.first_name = "player")
 conn.commit
 
 #Print database
