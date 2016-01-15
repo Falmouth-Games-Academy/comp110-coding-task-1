@@ -28,9 +28,11 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 #Insert some example data - Having some problem with this as my database says there is an error.
-c.execute("INSERT INTO players VALUES (" + my_first_int _ ", ' " + my_first_str + "', 'Users')")
+c.execute("INSERT INTO players VALUES (' + my_first_int _ ", ' " + my_first_str + "', 'Users')")
 conn.commit
 
 #Print database
 c.execute("SELECT * FROM players)
 print([r[0], r[1]) for r in c.fetchall()])
+
+
