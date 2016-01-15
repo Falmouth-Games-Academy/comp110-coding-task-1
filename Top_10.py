@@ -28,7 +28,7 @@ ORDER BY scores DESC
 LIMIT 0, 10"
 
 
-c.execute(sql, ("url.ac.uk",))
+c.execute(sql, ("bsccg03.ga.fal.io/",))
 results = c.fetchall()
 print(result)
 
