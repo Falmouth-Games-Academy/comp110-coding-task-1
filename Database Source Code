@@ -156,7 +156,7 @@ LIMIT 0, 10"
 
 
 c.execute(sql, ("url.ac.uk",))
-results = cursor.fetchall()
+results = c.fetchall()
 print(result)
 
 connection.close()
