@@ -27,7 +27,7 @@ FROM scores
 INNER JOIN players
 ON player_id = players.id
 ORDER BY scores DESC
-LIMIT 0, 10"
+LIMIT 0, 10")
 
 score_table = ([(r[0], r[1], r[2]) for r in c.fetchall()])
 print(score_table)
