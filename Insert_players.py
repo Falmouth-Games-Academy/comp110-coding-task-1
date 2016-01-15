@@ -11,7 +11,6 @@ print("Content-Type: text/html; charset=utf-8\n\n")
 import cgi
 form = cgi.FieldStorage()
 
-user = str(form.getvalue('user'))
 if "user" not in form:
   print ("Something Went Wrong")
 else
