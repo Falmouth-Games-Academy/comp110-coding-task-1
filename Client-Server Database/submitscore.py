@@ -6,7 +6,7 @@ import cgi
 import json
 import pymysql
 
-import id
+import processing
 
 cgitb.enable()
 
@@ -27,9 +27,10 @@ conn = pymysql.connect(
         host='localhost')
 c = conn.cursor()
 
-player_ids = id.get_player_id(player_name)
+player_ids = processing.get_player_id(player_name)
 player_id = player_ids[0]
 
+# Insert the score
 c.execute("INSERT INTO scores_test VALUES(" + str(player_id) + ", " + level_number + ", " + score + ")")
 conn.commit()
 
