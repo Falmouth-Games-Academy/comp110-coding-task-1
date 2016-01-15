@@ -22,9 +22,11 @@ c = conn.cursor()
 
 
 #Get some example data
-sql = "SELECT 'first_name', 'last_name', 'score' 
+sql = "SELECT players.first_name,  scores.score 
 FROM scores 
-ORDER BY scores DESC
+INNER JOIN players  
+ON player_id = players.id  
+ORDER BY scores DESC  
 LIMIT 1"
 
 
