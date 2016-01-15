@@ -31,7 +31,7 @@ LIMIT 1"
 
 
 #c.execute(sql, ("bsccg03.ga.fal.io/",))
-results = c.fetchall()
-print(result)
+highscore = ([(r[0], r[1]) for r in c.fetchall()])
+print(highscore)
 
 connection.close()
