@@ -22,12 +22,12 @@ c = conn.cursor()
 
 
 #Get some example data
-c.execute = "SELECT players.first_name,  scores.score 
+c.execute = ("SELECT players.first_name,  scores.score 
 FROM scores 
 INNER JOIN players  
 ON player_id = players.id  
 ORDER BY scores DESC  
-LIMIT 1"
+LIMIT 1")
 
 
 #c.execute(sql, ("bsccg03.ga.fal.io/",))
