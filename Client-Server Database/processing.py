@@ -40,8 +40,11 @@ def get_player_id(player_name):
     cursor.execute("SELECT players_test.player_id FROM players_test "
                    "WHERE players_test.name='" + player_name + "'")
     player_id = [row[0] for row in cursor.fetchall()]
-    # Convert to string for consistency
-    return str(player_id[0])
+    if len(player_id) != 0:
+        # Convert to string for consistency
+        return str(player_id[0])
+    else:
+        return None
 
 def connect_to_database():
     # Connect to the database
