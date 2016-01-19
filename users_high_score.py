@@ -33,6 +33,6 @@ else:
 
 
 # Print the top 10 scores in the database.
-c.execute("SELECT * FROM scores WHERE ") #Not sure how to do this yet
+c.execute("SELECT * FROM scores WHERE playername = players.name ") # Not sure if this works
 # I need to look up the user name and get the ID number and then update the score for that ID
 print([(r[0], r[1], r[2]) for r in c.fetchall()])
