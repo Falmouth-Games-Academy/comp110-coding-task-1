@@ -3,11 +3,11 @@ A client-server database system to support a mobile game app.
 
  | Requirement | Done
 --- | --- | ---
-1 | retrieve the top 10 | x
-2 | retrieve the highest score of a given user | .
-3 | insert new users | x
-4 | update user names | X
-5 | insert new high scores | x
-6 | update high scores | .
+1 | retrieve the top 10 | Done
+2 | retrieve the highest score of a given user | Done
+3 | insert new users | Done
+4 | update user names | Done
+5 | insert new high scores | Done
+6 | update high scores | Done
 
 
