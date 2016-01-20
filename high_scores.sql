@@ -26,7 +26,7 @@ PRIMARY KEY (player_ID, level_ID)
 SELECT players.name, scores.player_ID
 FROM scores
 INNER JOIN players
-ON scores.players_ID = players.ID;
+ON scores.player_ID = players.ID;
 
 SELECT levels.name, scores.level_ID
 FROM scores
