@@ -25,9 +25,9 @@ def score_empty(player_id, level_number):
 
     connection, cursor = processing.connect_to_database()
     # Get entry for that player and level
-    cursor.execute("SELECT * FROM scores_test "
-                   "WHERE scores_test.player_id='" + player_id + "' AND "
-                   "scores_test.level_id='" + level_number + "'")
+    cursor.execute("SELECT * FROM scores "
+                   "WHERE player_id='" + player_id + "' AND "
+                   "level_id='" + level_number + "'")
     scores = [(row[0], row[1]) for row in cursor.fetchall()]
 
     # Length of list is 0 if score for that player/level doesn't exist
@@ -47,8 +47,8 @@ def level_exists(level_number):
 
     connection, cursor = processing.connect_to_database()
     # Get entry for that level number
-    cursor.execute("SELECT * FROM levels_test "
-                   "WHERE levels_test.level_id='" + level_number + "'")
+    cursor.execute("SELECT * FROM levels "
+                   "WHERE level_id='" + level_number + "'")
     level = [(row[0], row[1]) for row in cursor.fetchall()]
 
     # Length of list is 0 if level doesn't exist
@@ -67,7 +67,7 @@ def add_score(player_id, level_number, score):
 
     connection, cursor = processing.connect_to_database()
     # Insert the score
-    cursor.execute("INSERT INTO scores_test VALUES(" + player_id + ", " + level_number + ", " + score + ")")
+    cursor.execute("INSERT INTO scores VALUES(" + player_id + ", " + level_number + ", " + score + ")")
     connection.commit()
 
 
@@ -86,13 +86,13 @@ if __name__ == "__main__":
             processing.add_level(level_number)
 
         player_id = processing.get_player_id(player_name)
-
         if player_id != None and score_empty(player_id, level_number):
             add_score(player_id, level_number, score)
             print(json.dumps([player_name, level_number, score]))
         else:
             # If score already exists or player not in database
             print(json.dumps(None))
+
     else:
         # If player/level/score not provided
         print(json.dumps(None))

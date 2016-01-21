@@ -57,5 +57,5 @@ docs/_build/
 target/
 
 #Pycharm IDE
-Hotrod/.idea/
+/Client-Server Database/.idea/
 

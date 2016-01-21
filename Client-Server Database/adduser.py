@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
-"""Add a new player to the table of players"""
+"""Add a new player to the table of players.
+
+The code in this file adds a new player to the
+table of players in the database.
+"""
 
 import cgi
 import cgitb
@@ -15,13 +19,13 @@ def username_is_unique(username):
     """Check if a username does not already exist.
 
     This function checks if a username does not already
-    exist in the highscores database. If the user doesn't
-    already exist, it returns True. Otherwise, it returns False
+    exist in the players table. If the user doesn't
+    already exist, it returns True. Otherwise, it returns False.
     """
 
     connection, cursor = processing.connect_to_database()
     # Get list of all existing users
-    cursor.execute("SELECT players_test.name FROM players_test")
+    cursor.execute("SELECT player_name FROM players")
     existing_users = [(row[0]) for row in cursor.fetchall()]
 
     # Only one of each name will be allowed
@@ -39,8 +43,8 @@ def add_user_to_database(username):
     """
 
     connection, cursor = processing.connect_to_database()
-
-    cursor.execute("INSERT INTO players_test VALUES(null, '" + username + "')")
+    # Insert the new user
+    cursor.execute("INSERT INTO players VALUES(null, '" + username + "')")
     connection.commit()
 
 

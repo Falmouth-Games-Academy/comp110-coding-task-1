@@ -16,21 +16,26 @@ import processing
 
 
 def get_best_score(player_name, level_number):
+    """Return the best score for the given player and level.
+
+    This function returns the best score for the given player
+    on the given level. If the player does not have a score on
+    that level, it returns None.
+    """
 
     connection, cursor = processing.connect_to_database()
+    cursor.execute("SELECT score FROM scores "
+                   "INNER JOIN players ON scores.player_id = players.player_id "
+                   "INNER JOIN levels ON scores.level_id = levels.level_id "
+                   "WHERE players.player_name='" + player_name + "' AND levels.level_id=" + level_number)
+    best_score = [(row[0]) for row in cursor.fetchall()]
 
-    cursor.execute("SELECT players_test.name, levels_test.level_name, scores_test.score FROM scores_test "
-                   "INNER JOIN players_test ON scores_test.player_id = players_test.player_id "
-                   "INNER JOIN levels_test ON scores_test.level_id = levels_test.level_id "
-                   "WHERE players_test.name='" + player_name + "' AND levels_test.level_id=" + level_number +
-                   " ORDER BY score DESC LIMIT 1")
-
-    best_score = [(row[0], row[1], row[2]) for row in cursor.fetchall()]
-
+    # If length isn't greater than 0 there is no existing best score
     if len(best_score) > 0:
-        return best_score[0][2]
+        return best_score[0]
     else:
         return None
+
 
 if __name__ == "__main__":
     # Turn on debug mode
@@ -47,6 +52,8 @@ if __name__ == "__main__":
         if best_score is not None:
             print(json.dumps(best_score))
         else:
+            # If score doesn't exist for that player/level
             print(json.dumps(None))
     else:
+        # If player/level not provided
         print(json.dumps(None))

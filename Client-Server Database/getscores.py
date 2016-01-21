@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
 """Respond with a list of the the top 10 high scores.
+
+The code in this file responds with a list of the
+top 10 high scores for the given level.
 """
 
 import cgi
@@ -12,19 +15,26 @@ import pymysql
 import processing
 
 def get_top_ten(level_number):
-    connection, cursor = processing.connect_to_database()
+    """Return a list of the top 10 high scores of a given level.
 
+    This function retrieves a list of the top 10 high scores for
+    the given level in descending order from the database, and
+    then returns the list.
+    """
+
+    connection, cursor = processing.connect_to_database()
     # Get the top 10 high scores from the database, list the highest first
-    cursor.execute("SELECT players_test.name, levels_test.level_name, score FROM scores_test "
-                   "INNER JOIN players_test ON scores_test.player_id = players_test.player_id "
-                   "INNER JOIN levels_test ON scores_test.level_id = levels_test.level_id "
-                   "WHERE scores_test.level_id='" + level_number + "' "
+    cursor.execute("SELECT players.player_name, levels.level_name, score FROM scores "
+                   "INNER JOIN players ON scores.player_id = players.player_id "
+                   "INNER JOIN levels ON scores.level_id = levels.level_id "
+                   "WHERE scores.level_id='" + level_number + "' "
                    "ORDER BY score DESC LIMIT 10")
 
     highscores = [(row[0], row[1], row[2]) for row in cursor.fetchall()]
     return highscores
 
 if __name__ == "__main__":
+    # Turn on debug mode
     cgitb.enable()
     # Print necessary headers
     print("Content-Type: text/html; charset=utf-8\n\n")
@@ -36,5 +46,6 @@ if __name__ == "__main__":
         highscores = get_top_ten(level_number)
         print(json.dumps(highscores))
     else:
+        # If level number not provided
         print(json.dumps(None))
 
