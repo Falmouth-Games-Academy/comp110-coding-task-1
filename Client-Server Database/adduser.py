@@ -53,7 +53,7 @@ if __name__ == '__main__':
     form = cgi.FieldStorage()
     username = processing.get_player_name(form)
 
-    if username != None and username_is_unique(username):
+    if username is not None and username_is_unique(username):
         add_user_to_database(username)
         print(json.dumps(username))
     else:

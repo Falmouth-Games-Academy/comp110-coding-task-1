@@ -46,6 +46,11 @@ def get_player_id(player_name):
     else:
         return None
 
+def add_level(level_number):
+    connection, cursor = connect_to_database()
+    cursor.execute("INSERT INTO levels_test VALUES('" + level_number + "', 'Level " + level_number + "')")
+    connection.commit()
+
 def connect_to_database():
     # Connect to the database
     connection = pymysql.connect(

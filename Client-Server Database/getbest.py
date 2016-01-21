@@ -7,6 +7,7 @@ score for the requested player and level.
 """
 
 import cgi
+import cgitb
 import json
 
 import pymysql
@@ -25,9 +26,15 @@ def get_best_score(player_name, level_number):
                    " ORDER BY score DESC LIMIT 1")
 
     best_score = [(row[0], row[1], row[2]) for row in cursor.fetchall()]
-    return best_score
+
+    if len(best_score) > 0:
+        return best_score[0][2]
+    else:
+        return None
 
 if __name__ == "__main__":
+    # Turn on debug mode
+    cgitb.enable()
     # Print necessary headers
     print("Content-Type: text/html; charset=utf-8\n\n")
 
@@ -35,8 +42,11 @@ if __name__ == "__main__":
     player_name = processing.get_player_name(form)
     level_number = processing.get_level_number(form)
 
-    if player_name != None and level_number != None:
+    if player_name is not None and level_number is not None:
         best_score = get_best_score(player_name, level_number)
-        print(json.dumps(best_score))
+        if best_score is not None:
+            print(json.dumps(best_score))
+        else:
+            print(json.dumps(None))
     else:
         print(json.dumps(None))

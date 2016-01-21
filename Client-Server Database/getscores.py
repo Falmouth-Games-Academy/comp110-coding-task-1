@@ -32,7 +32,7 @@ if __name__ == "__main__":
     form = cgi.FieldStorage()
     level_number = processing.get_level_number(form)
 
-    if level_number != None:
+    if level_number is not None:
         highscores = get_top_ten(level_number)
         print(json.dumps(highscores))
     else:
