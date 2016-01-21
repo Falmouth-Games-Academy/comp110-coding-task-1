@@ -24,10 +24,10 @@ c = conn.cursor()
 #Get some example data
 c.execute = ("SELECT players.first_name, players.last_name, scores.score 
 FROM scores 
-INNER JOIN players
+INNER JOIN player
 ON player_id = players.id
 ORDER BY scores DESC
-LIMIT 0, 10")
+LIMIT 10")
 
 score_table = ([(r[0], r[1], r[2]) for r in c.fetchall()])
 print(score_table)
