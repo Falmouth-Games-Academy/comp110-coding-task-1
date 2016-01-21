@@ -53,6 +53,22 @@ def get_score(form):
         return score
 
 
+def get_new_name(form):
+    """Return the player name from the form to be used in the database.
+
+    This function retrieves the player name from the form and formats it
+    so that it is consistent with the database entries. It then returns
+    the player name as a string.
+    """
+
+    if "new" not in form:
+        return None
+    else:
+        new_name = str(form.getvalue("new")).upper()
+        new_name = chop_name(new_name, 3)
+        return new_name
+
+
 def chop_name(name, characters):
     """Return a name stripped down to the given number of characters."""
 
@@ -79,6 +95,26 @@ def get_player_id(player_name):
         return str(player_id[0])
     else:
         return None
+
+
+def username_is_unique(username):
+    """Check if a username does not already exist.
+
+    This function checks if a username does not already
+    exist in the players table. If the user doesn't
+    already exist, it returns True. Otherwise, it returns False.
+    """
+
+    connection, cursor = connect_to_database()
+    # Get list of all existing users
+    cursor.execute("SELECT player_name FROM players")
+    existing_users = [(row[0]) for row in cursor.fetchall()]
+
+    # Only one of each name will be allowed
+    if username not in existing_users:
+        return True
+    else:
+        return False
 
 
 def add_level(level_number):

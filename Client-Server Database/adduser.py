@@ -15,26 +15,6 @@ import pymysql
 import processing
 
 
-def username_is_unique(username):
-    """Check if a username does not already exist.
-
-    This function checks if a username does not already
-    exist in the players table. If the user doesn't
-    already exist, it returns True. Otherwise, it returns False.
-    """
-
-    connection, cursor = processing.connect_to_database()
-    # Get list of all existing users
-    cursor.execute("SELECT player_name FROM players")
-    existing_users = [(row[0]) for row in cursor.fetchall()]
-
-    # Only one of each name will be allowed
-    if username not in existing_users:
-        return True
-    else:
-        return False
-
-
 def add_user_to_database(username):
     """Add a username to the database.
 
@@ -57,7 +37,7 @@ if __name__ == '__main__':
     form = cgi.FieldStorage()
     username = processing.get_player_name(form)
 
-    if username is not None and username_is_unique(username):
+    if username is not None and processing.username_is_unique(username):
         add_user_to_database(username)
         print(json.dumps(username))
     else:
