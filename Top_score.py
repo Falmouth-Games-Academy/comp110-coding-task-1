@@ -22,7 +22,7 @@ conn = pymysql.connect(
 c = conn.cursor()
 
 
-#Get some example data
+#Get top score
 def print_highscore():
   c.execute = ("SELECT players.first_name,  scores.score 
   FROM scores 
