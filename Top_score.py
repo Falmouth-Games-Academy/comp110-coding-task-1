@@ -2,6 +2,8 @@
 
 #Turn on debug mode.
 import cgitb
+import pymsql
+import json
 cgitb.enable()
 
 #Print necessary headers.
@@ -12,7 +14,6 @@ import cgi
 form = cgi.FieldStorage()
   
 #Connect to the database.
-import pymysql
 conn = pymysql.connect(
   db = 'example',
   user = 'root'
@@ -22,16 +23,21 @@ c = conn.cursor()
 
 
 #Get some example data
-c.execute = ("SELECT players.first_name,  scores.score 
-FROM scores 
-INNER JOIN players  
-ON player_id = players.id  
-ORDER BY score DESC  
-LIMIT 1")
-
-
-#c.execute(sql, ("bsccg03.ga.fal.io/",))
-highscore = ([(r[0], r[1]) for r in c.fetchall()])
-print(highscore)
+def print_highscore():
+  c.execute = ("SELECT players.first_name,  scores.score 
+  FROM scores 
+  INNER JOIN players  
+  ON player_id = players.id  
+  ORDER BY score DESC  
+  LIMIT 1")
+  
+  print ("<br/><br/><b>Top score</b><br/>")
+  print ([(r[0], r[1], r[2]) for r in c.fetchall()])
+  
+def main():
+  print_highscore()
+  
+if __name__ == "__main__":
+  main()
 
 connection.close()
