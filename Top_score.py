@@ -26,7 +26,7 @@ c.execute = ("SELECT players.first_name,  scores.score
 FROM scores 
 INNER JOIN players  
 ON player_id = players.id  
-ORDER BY scores DESC  
+ORDER BY score DESC  
 LIMIT 1")
 
 
