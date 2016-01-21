@@ -10,6 +10,6 @@ If any of the requests fail to retrieve or add the requested data, they print No
 |retrieve the top 10 high scores from a database server|getscores.py|
 |retrieve the highest score of a given user|getbest.py|
 |insert new users |adduser.py|
-|update user names ||
+|update user names |updatename.py|
 |insert new high scores into the database server|submitscore.py|
 |update high scores in the database|updatescore.py|
