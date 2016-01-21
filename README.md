@@ -5,7 +5,6 @@ If any of the requests fail to retrieve or add the requested data, they print No
 
 ##Locations of Algorithms Required for Assignment
 
-###Tone Generation
 |Algorithm|File|
 |---|---|
 |retrieve the top 10 high scores from a database server|getscores.py|
