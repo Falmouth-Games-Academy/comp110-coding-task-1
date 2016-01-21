@@ -13,3 +13,4 @@ If any of the requests fail to retrieve or add the requested data, they print No
 |update user names |updatename.py|
 |insert new high scores into the database server|submitscore.py|
 |update high scores in the database|updatescore.py|
+|sql file|highscores.sql|
