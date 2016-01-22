@@ -72,6 +72,20 @@ def get_player_id():
     c.execute("SELECT * FROM players")
     player_id = str(r[0] for r in c.fetchall())
     print (player_id)
+    
+'''
+Editted above but gives all the id's not the one for the first_name player.
+'''
+def get_player_id():
+    first_name = str(form.getvalue('first_name'))
+    score = str(form.getvalue('score'))
+    c.execute("SELECT * FROM players WHERE players.first_name =  " 'first_name')
+    players_id = [(r[0]) for r in c.fetchall()]
+    print (players_id)
+    c.execute("UPDATE scores SET score = ' + score + ' WHERE player_id = " 'players_id')
+    print ("Score updated for ' + first_name + '")
+    conn.commit()
+
 
 '''
 Tried with get_id and with select players.id or select id but it still doesn't work.
