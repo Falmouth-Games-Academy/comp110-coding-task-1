@@ -75,6 +75,7 @@ def get_player_id():
     
 '''
 Editted above but gives all the id's not the one for the first_name player.
+Need to check if player first_name is in list of players.
 '''
 def get_player_id():
     first_name = str(form.getvalue('first_name'))
