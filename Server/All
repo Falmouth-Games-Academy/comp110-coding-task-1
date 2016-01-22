@@ -66,6 +66,14 @@ I don't know if this is working as it gives an error when ever I try to use with
     #player_id = ([(r[0] for r in c.fetchall()])
 
 '''
+This worked but gave me a weird id "at 0x7f54c1859ea0>".
+'''
+def get_player_id():
+    c.execute("SELECT * FROM players")
+    player_id = str(r[0] for r in c.fetchall())
+    print (player_id)
+
+'''
 Tried with get_id and with select players.id or select id but it still doesn't work.
 '''
 #required get_id
