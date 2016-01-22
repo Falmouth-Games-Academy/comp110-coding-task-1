@@ -1,0 +1,139 @@
+#!/usr/bin/python
+
+# Turn on debug mode.
+import cgitb
+import pymysql
+import json
+
+cgitb.enable()
+
+# Print necessary headers.
+print("Content-Type: text/html; charset=utf-8\n\n")
+
+import cgi
+form = cgi.FieldStorage()
+print ("Hello")
+print ("<br />")
+print ("<br />")
+
+#def greet_player():
+    #if "player" not in form:
+        #print ("Something Went Wrong")
+    #else:
+        #print("<b>Hello " + str(form.getvalue("player")) + "</b>")
+        #my_first_int = 1
+        #my_first_str = str(form.getvalue("user"))
+
+
+# Connect to the database.
+conn = pymysql.connect(
+    db='highscores',
+    user='root',
+    passwd='password',
+    host='localhost')
+c = conn.cursor()
+
+def greet_player():
+    if 'first_name' not in form:
+        print("Something went wrong")
+    else:
+        print("<b>Hello " + str(form.getvalue("first_name")) + "</b>")
+        
+'''
+Get information from player: first_name, last_name and score
+'''
+def get_name_score():
+    if 'first_name' and 'last_name' and 'score' not in form:
+        print ("Where are first name, last name, score?")
+    else:
+        first_name = str(form.getvalue('first_name'))
+        last_name = str(form.getvalue('last_name'))
+        score = str(form.getvalue('score'))
+        
+'''        
+I don't know why this won't work. It doesn't give an error so I have no idea what's wrong.
+'''
+def add_player(first_name, last_name):
+# Insert some example data.
+    c.execute("INSERT INTO players VALUES (NULL, ' + first_name + ', ' + last_name + ')")
+    conn.commit()
+    
+'''    
+I don't know if this is working as it gives an error when ever I try to use with add_player or add_score.
+'''
+#def get_id(first_name):
+    #c.execute("SELECT * FROM players WHERE first_name = " ' + first_name + ')
+    #player_id = ([(r[0] for r in c.fetchall()])
+
+'''
+Tried with get_id and with select players.id or select id but it still doesn't work.
+'''
+#required get_id
+def add_score(first_name):
+    c.execute("SELECT players.id FROM players WHERE players.first_name" = + first_name +")
+    #c.execute("INSERT INTO scores VALUES (' + player_id + ', ' + score + ')")
+    conn.commit()
+
+'''
+This works.
+'''
+def print_players():
+    c.execute("SELECT * FROM players")
+    players = [(r[0], r[1], r[2]) for r in c.fetchall()]
+    print (json.dumps(players))
+
+'''
+This works.
+'''
+def print_scores():
+# Print the contents of the database.
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id")
+    print ("<b>All scores</b><br/>")
+    scores = ([(r[0], r[1], r[2]) for r in c.fetchall()])
+    print (json.dumps(scores))
+
+'''
+This works.
+'''
+def print_highscores():
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id ORDER BY score DESC LIMIT 10")
+#c.execute("SELECT * FROM scores")
+#c.execute("SELECT * FROM players")
+    print ("<b>Top 10 scores</b><br />")
+    scores = [(r[0], r[1], r[2]) for r in c.fetchall()]
+    print (json.dumps(scores))
+
+'''
+This works.
+'''
+def print_highscore():
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id ORDER BY score DESC LIMIT 1")
+    print ("<b>Top score</b><br />")
+    scores = ([(r[0], r[1], r[2]) for r in c.fetchall()])
+    print (json.dumps(scores))
+
+'''
+This works.
+'''
+def print_break():
+    print ("<br/><br/>")
+
+def main():
+    greet_player()
+    get_name_score()
+    print_break()
+
+    add_player()
+    #get_id()
+    add_score()
+
+    print_players()
+    print_break()
+    print_scores()
+    print_break()
+    print_highscores()
+    print_break()
+    print_highscore()
+
+if __name__ == "__main__":
+    main()
