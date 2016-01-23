@@ -93,17 +93,27 @@ def print_highscore():
 def print_break():
     print ("<br/><br/>")
 
+
 def main():
 
-    first_name = str(form.getvalue('first_name')
-    last_name = str(form.getvalue('last_name')
-    score = str(form.getvalue('score')
+    if 'first_name' and 'last_name' and 'score' not in form:
+        print("Missing values")
+    else:
+        first_name = str(form.getvalue('first_name')
+        last_name = str(form.getvalue('last_name')
+        score = str(form.getvalue('score')
+        print ("<b>Hello " %(first_name)s "</b>")
 
-    greet_player()
+    #greet_player()
+    #get_name_score()
     print_break()
+    #get_player_id()
 
-    add_score_player()
+    add_score_player(first_name, last_name, score)
 
+    #add_player()
+    #get_id()
+    #add_score()
     #update_score()
     print_players()
     print_break()
@@ -115,3 +125,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
