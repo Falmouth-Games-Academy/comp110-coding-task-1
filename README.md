@@ -4,7 +4,7 @@ http://bsccg03.ga.fal.io/
 
 ##Done
 -top highscore  
--top 10 highscores 
+-top 10 highscores  
 -insert user  
 -insert score
 
