@@ -27,7 +27,7 @@ def get_best_score(player_name, level_number):
     cursor.execute("SELECT score FROM scores "
                    "INNER JOIN players ON scores.player_id = players.player_id "
                    "INNER JOIN levels ON scores.level_id = levels.level_id "
-                   "WHERE players.player_name='" + player_name + "' AND levels.level_id=" + level_number)
+                   "WHERE players.player_name=%s AND levels.level_id=%s", (player_name, level_number))
     best_score = [(row[0]) for row in cursor.fetchall()]
 
     # If length isn't greater than 0 there is no existing best score

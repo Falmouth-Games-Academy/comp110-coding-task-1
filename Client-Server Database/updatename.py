@@ -26,8 +26,8 @@ def change_player_name(username, player_id):
 
     connection, cursor = processing.connect_to_database()
     # Change the appropriate username
-    cursor.execute("UPDATE players SET player_name='" + username + "' "
-                   "WHERE player_id='" + player_id + "'")
+    cursor.execute("UPDATE players SET player_name=%s"
+                   "WHERE player_id=%s", (username, player_id))
     connection.commit()
 
 

@@ -24,7 +24,7 @@ def add_user_to_database(username):
 
     connection, cursor = processing.connect_to_database()
     # Insert the new user
-    cursor.execute("INSERT INTO players VALUES(null, '" + username + "')")
+    cursor.execute("INSERT INTO players VALUES(null, %s)", (username,))
     connection.commit()
 
 

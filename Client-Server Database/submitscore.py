@@ -26,8 +26,7 @@ def score_empty(player_id, level_number):
     connection, cursor = processing.connect_to_database()
     # Get entry for that player and level
     cursor.execute("SELECT * FROM scores "
-                   "WHERE player_id='" + player_id + "' AND "
-                   "level_id='" + level_number + "'")
+                   "WHERE player_id=%s AND level_id=%s", (player_id, level_number))
     scores = [(row[0], row[1]) for row in cursor.fetchall()]
 
     # Length of list is 0 if score for that player/level doesn't exist
@@ -47,8 +46,7 @@ def level_exists(level_number):
 
     connection, cursor = processing.connect_to_database()
     # Get entry for that level number
-    cursor.execute("SELECT * FROM levels "
-                   "WHERE level_id='" + level_number + "'")
+    cursor.execute("SELECT * FROM levels WHERE level_id=%s", (level_number,))
     level = [(row[0], row[1]) for row in cursor.fetchall()]
 
     # Length of list is 0 if level doesn't exist
@@ -67,7 +65,7 @@ def add_score(player_id, level_number, score):
 
     connection, cursor = processing.connect_to_database()
     # Insert the score
-    cursor.execute("INSERT INTO scores VALUES(" + player_id + ", " + level_number + ", " + score + ")")
+    cursor.execute("INSERT INTO scores VALUES(%s, %s, %s)", (player_id, level_number, score))
     connection.commit()
 
 

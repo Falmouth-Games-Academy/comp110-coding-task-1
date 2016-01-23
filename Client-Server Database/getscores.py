@@ -27,8 +27,8 @@ def get_top_ten(level_number):
     cursor.execute("SELECT players.player_name, levels.level_name, score FROM scores "
                    "INNER JOIN players ON scores.player_id = players.player_id "
                    "INNER JOIN levels ON scores.level_id = levels.level_id "
-                   "WHERE scores.level_id='" + level_number + "' "
-                   "ORDER BY score DESC LIMIT 10")
+                   "WHERE scores.level_id=%s"
+                   "ORDER BY score DESC LIMIT 10", level_number)
 
     highscores = [(row[0], row[1], row[2]) for row in cursor.fetchall()]
     return highscores

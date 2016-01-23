@@ -87,7 +87,7 @@ def get_player_id(player_name):
     connection, cursor = connect_to_database()
 
     cursor.execute("SELECT player_id FROM players "
-                   "WHERE player_name='" + player_name + "'")
+                   "WHERE player_name=%s", (player_name,))
     player_id = [row[0] for row in cursor.fetchall()]
 
     if len(player_id) != 0:
@@ -126,7 +126,8 @@ def add_level(level_number):
     """
 
     connection, cursor = connect_to_database()
-    cursor.execute("INSERT INTO levels VALUES('" + level_number + "', 'Level " + level_number + "')")
+    level_name = "Level " + level_number
+    cursor.execute("INSERT INTO levels VALUES(%s, %s)", (level_number, level_name))
     connection.commit()
 
 

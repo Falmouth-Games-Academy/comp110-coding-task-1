@@ -23,9 +23,8 @@ def update_score(player_id, level_number, score):
     """
 
     connection, cursor = processing.connect_to_database()
-    cursor.execute("UPDATE scores SET score='" + score + "' "
-                   "WHERE player_id='" + player_id + "' AND "
-                   "level_id='" + level_number + "'")
+    cursor.execute("UPDATE scores SET score=%s "
+                   "WHERE player_id=%s AND level_id=%s", (score, player_id, level_number))
     connection.commit()
 
 
@@ -40,8 +39,7 @@ def is_best(player_id, level_number, score):
 
     connection, cursor = processing.connect_to_database()
     cursor.execute("SELECT score FROM scores "
-                   "WHERE player_id='" + player_id + "' AND "
-                   "level_id='" + level_number + "'")
+                   "WHERE player_id=%s AND level_id=%s", (player_id, level_number))
     current_best = [(row[0]) for row in cursor.fetchall()]
 
     # There isn't an existing score if length of list is 0
