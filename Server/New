@@ -44,7 +44,7 @@ Attempt at using %s.
 Doesn't work.
 '''
 
-def add_score_player(first_name, last_name):
+def add_score_player(first_name, last_name, score):
     add_new_player = ("INSERT INTO players "
     "(first_name, last_name) "
     "VALUES (%s, %s)")
