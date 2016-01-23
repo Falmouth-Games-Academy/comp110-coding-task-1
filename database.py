@@ -72,6 +72,8 @@ def add_score_player():
     "VALUES (%(player_id)s, %(score)s)")
 
     new_player = (first_name, last_name)
+
+    c.execute(add_new_player, new_player)
     player_id = c.lastrowid
 
     new_score = {
@@ -79,7 +81,7 @@ def add_score_player():
         'score': score,
     }
 
-    c.execute(add_player_score, add_new_player)
+    c.execute(add_player_score, new_score)
 
     conn.commit()
 
