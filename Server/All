@@ -87,14 +87,43 @@ def get_player_id():
     print ("Score updated for ' + first_name + '")
     conn.commit()
 
+'''
+Attempt using %s.
+'''
+def get_player_id():
+    first_name = str(form.getvalue('first_name'))
+    score = str(form.getvalue('score'))
+    c.execute("SELECT * FROM players WHERE players.first_name =  " 'first_name')
+    players_id = [(r[0]) for r in c.fetchall()]
+    print (players_id)
+    c.execute("UPDATE scores SET score = %(score)s ' WHERE player_id = " 'players_id')
+    print ("Score updated for %(first_name)s")
+    conn.commit()
+
 
 '''
 Tried with get_id and with select players.id or select id but it still doesn't work.
 '''
 #required get_id
-def add_score(first_name):
-    c.execute("SELECT players.id FROM players WHERE players.first_name" = + first_name +")
-    #c.execute("INSERT INTO scores VALUES (' + player_id + ', ' + score + ')")
+def add_score_player(first_name, last_name):
+    add_new_player = ("INSERT INTO players "
+    "(first_name, last_name) "
+    "VALUES (%s, %s)")
+    
+    add_player_score = ("INSERT INTO scores"
+    "(player_id, score) "
+    "VALUES (%(player_id)s, %(score)s)")
+    
+    new_player = (first_name, last_name)
+    player_id = c.lastrowid
+    
+    new_score = {
+        'player_id': player_id,
+        'score': score,
+    }
+    
+    c.execute(add_player_score, add_new_player)
+    
     conn.commit()
 
 '''
