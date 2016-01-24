@@ -1,6 +1,9 @@
 # comp110-coding-task-1
-A client-server database system to support a mobile game app.
-http://bsccg03.ga.fal.io/
+A client-server database system to support a mobile game app.  
+http://bsccg03.ga.fal.io/  
+The main.py is the demonstration with all functions to be tested using the request string in form.
+
+The others could be implimented if they had their own directory.
 
 ##Done
 -top highscore  
