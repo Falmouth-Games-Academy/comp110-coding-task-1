@@ -123,7 +123,7 @@ Print all the scores with player names.
 '''
 def print_scores():
 # Print the contents of the database.
-    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player$
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id")
     print ("<b>All scores</b><br/>")
     scores = ([(r[0], r[1], r[2]) for r in c.fetchall()])
     print (json.dumps(scores))
@@ -141,7 +141,7 @@ def print_highscores():
 Print the top score with player name.
 '''
 def print_highscore():
-    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player$
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id ORDER BY score DESC LIMIT 1")
     print ("<b>Top score</b><br />")
     scores = ([(r[0], r[1], r[2]) for r in c.fetchall()])
     print (json.dumps(scores))
