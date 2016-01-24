@@ -8,15 +8,16 @@ Note: Commits have only happened in the last couple of weeks because I was leavi
 
 ##Locations of Algorithms Required for Assignment
 
-|Algorithm|File|
-|---|---|
-|retrieve the top 10 high scores from a database server|getscores.py|
-|retrieve the highest score of a given user|getbest.py|
-|insert new users |adduser.py|
-|update user names |updatename.py|
-|insert new high scores into the database server|submitscore.py|
-|update high scores in the database|updatescore.py|
+|Algorithm|File|Fields Required for GET Request|
+|---|---|---|
+|retrieve the top 10 high scores from a database server|getscores.py|level|
+|retrieve the highest score of a given user|getbest.py|player, level|
+|insert new users |adduser.py|player|
+|update user names |updatename.py|player, new|
+|insert new high scores into the database server|submitscore.py|player, level, score|
+|update high scores in the database|updatescore.py|player, level, score|
 |SQL file|highscores.sql|
+
 
 ##Entity Relationship Diagram for Database
 One player can have zero to many scores. One level can have zero to many scores. A score can have one and only one player. A score can have one and only one level.
