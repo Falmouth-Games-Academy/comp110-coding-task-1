@@ -26,3 +26,17 @@ def print_highscore():
     print ("<b>Top score</b><br />")
     scores = ([(r[0], r[1], r[2]) for r in c.fetchall()])
     print (json.dumps(scores))
+    
+    '''
+The main gets request from form then displays appropriate text or error.
+'''
+def main():
+    if 'request' not in form:
+        print("Missing request")
+    else:
+        request = str(form.getvalue('request'))
+        if request == 'top_score':
+            print_highscore()
+
+if __name__ == "__main__":
+    main()
