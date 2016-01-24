@@ -4,10 +4,7 @@
 import cgitb
 import pymysql
 import json
-#import mysql.connector
 
-#cnx = mysql.connector.connect(user='root', database='highscores')
-#cursor = cnx.cursor()
 cgitb.enable()
 
 # Print necessary headers.
