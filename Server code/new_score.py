@@ -31,8 +31,15 @@ def insert_score(cursor, conn, playerID, level, score):
 
 def print_scores(cursor):
     # Print the contents of the scores table
-    cursor.execute("SELECT * FROM scores")
-    scores = [(r[0], r[1], r[2]) for r in cursor.fetchall()]
+    cursor.execute("SELECT players.name, levels.name, scores.score FROM scores "
+                   "INNER JOIN players ON scores.player_ID = players.ID "
+                   "INNER JOIN levels ON scores.level_ID = levels.ID "
+                   "ORDER BY score DESC LIMIT 10")
+    results = [(r[0], r[1], r[2]) for r in cursor.fetchall()]
+    scores = str(results)
+    scores = scores.replace('[', ' ')
+    scores = scores.replace("'", " ")
+    scores = scores.replace(']', ' ')
     print(json.dumps(scores))
 
 

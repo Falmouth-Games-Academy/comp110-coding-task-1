@@ -57,5 +57,8 @@ def main():
         update_score(cursor, conn, player_ID, level, score)
         print_scores(cursor)
 
+
 if __name__ == "__main__":
     main()
+
+

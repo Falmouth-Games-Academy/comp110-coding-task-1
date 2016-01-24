@@ -34,4 +34,4 @@ def main():
     print_results(cursor)
 
 if __name__ == "__main__":
-  main()
+    main()
