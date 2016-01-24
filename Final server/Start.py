@@ -12,6 +12,11 @@ print("Content-Type: text/html; charset=utf-8\n\n")
 
 import cgi
 form = cgi.FieldStorage()
-print ("Hello")
-print ("<br />")
-print ("<br />")
+
+# Connect to the database.
+conn = pymysql.connect(
+    db='highscores',
+    user='root',
+    passwd='samwillsfal',
+    host='localhost')
+c = conn.cursor()
