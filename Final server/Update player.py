@@ -1,3 +1,18 @@
+#!/usr/bin/python
+
+# Turn on debug mode.
+import cgitb
+import pymysql
+import json
+
+cgitb.enable()
+
+# Print necessary headers.
+print("Content-Type: text/html; charset=utf-8\n\n")
+
+import cgi
+form = cgi.FieldStorage()
+
 def update_player():
     first_name = str(form.getvalue('first_name'))
     new_first_name = str(form.getvalue('new_first_name'))
