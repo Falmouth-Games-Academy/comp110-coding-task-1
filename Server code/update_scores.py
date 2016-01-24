@@ -5,49 +5,46 @@ import cgitb
 import cgi
 import pymysql
 import json
+import connect_to_database
 
 cgitb.enable()
 
+"""update_score.py updates the players score for a specific level """
 
 # Print necessary headers.
 print("Content-Type: text/html; charset=utf-8\n\n")
 
 
-def connect_to_database():
-    # This function creates a connection to the high_scores database
-    conn = pymysql.connect(
-        db='high_scores',
-        user='root',
-        passwd='ImprobableDreams',
-        host='localhost')
-    return conn
+def get_id(cursor, playername):
+    cursor.execute("SELECT * FROM players WHERE players.name ='" + playername + "' LIMIT 1")
+    fetch_id = ([(r[0]) for r in cursor.fetchall()])
+    player_id = str(fetch_id[0])
+    return player_id
 
 
-def get_id(c, playername):
-    c.execute("SELECT * FROM players WHERE players.name ='" + playername + "' LIMIT 1")
-    fetch_ID = ([(r[0]) for r in c.fetchall()])
-    player_ID = str(fetch_ID[0])
-    return player_ID
-    # Needs to be able to deal with player not existing
-
-
-def update_score(c, conn, playerID, level, score):
-    # Insert playerID, level and score in scores table
-    c.execute("UPDATE scores SET score = " + score +" WHERE player_ID = " +playerID + " AND level_ID = "+ level +" ")
+def update_score(cursor, conn, playerID, level, score):
+    # Inserts playerID, level and score in scores table
+    cursor.execute("UPDATE scores SET score = " + score +" WHERE player_ID = " +playerID + " AND level_ID = "+ level +" ")
     conn.commit()
-    #Needs to find duplicate enteries
 
 
-def print_scores(c):
+def print_scores(cursor):
     # Print the contents of the scores table
-    c.execute("SELECT * FROM scores")
-    scores = [(r[0], r[1], r[2]) for r in c.fetchall()]
+    cursor.execute("SELECT players.name, levels.name, scores.score FROM scores "
+                   "INNER JOIN players ON scores.player_ID = players.ID "
+                   "INNER JOIN levels ON scores.level_ID = levels.ID "
+                   "ORDER BY score DESC LIMIT 10")
+    results = [(r[0], r[1], r[2]) for r in cursor.fetchall()]
+    scores = str(results)
+    scores = scores.replace('[', ' ')
+    scores = scores.replace("'", " ")
+    scores = scores.replace(']', ' ')
     print(json.dumps(scores))
 
 
 def main():
-    conn = connect_to_database()
-    c = conn.cursor()
+    conn = connect_to_database.connect()
+    cursor = conn.cursor()
     form = cgi.FieldStorage()
 
     if "playername" not in form or "level" not in form or "score" not in form:
@@ -56,9 +53,9 @@ def main():
         playername = str(form.getvalue('playername'))
         level = str(form.getvalue('level'))
         score = str(form.getvalue('score'))
-        player_ID = get_id(c, playername)
-        update_score(c, conn, player_ID, level, score)
-        print_scores(c)
+        player_ID = get_id(cursor, playername)
+        update_score(cursor, conn, player_ID, level, score)
+        print_scores(cursor)
 
 if __name__ == "__main__":
     main()
