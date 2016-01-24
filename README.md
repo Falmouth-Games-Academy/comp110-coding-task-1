@@ -6,10 +6,8 @@ http://bsccg03.ga.fal.io/
 -top highscore  
 -top 10 highscores  
 -insert user  
--insert score
-
-Kivy app uses callback
-
-##To do:
+-insert score  
 -update user  
 -update score  
+
+Kivy app uses callback
