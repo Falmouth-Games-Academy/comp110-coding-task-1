@@ -13,6 +13,14 @@ print("Content-Type: text/html; charset=utf-8\n\n")
 import cgi
 form = cgi.FieldStorage()
 
+# Connect to the database.
+conn = pymysql.connect(
+    db='highscores',
+    user='root',
+    passwd='samwillsfal',
+    host='localhost')
+c = conn.cursor()
+
 def update_player():
     first_name = str(form.getvalue('first_name'))
     new_first_name = str(form.getvalue('new_first_name'))
