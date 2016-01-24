@@ -14,7 +14,19 @@ import cgi
 form = cgi.FieldStorage()
 
 def print_highscores():
-    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player$
+    c.execute("SELECT players.first_name, players.last_name, scores.score FROM scores INNER JOIN players ON player_id = players.id ORDER BY score DESC LIMIT 10")
     print ("<b>Top 10 scores</b><br />")
     scores = [(r[0], r[1], r[2]) for r in c.fetchall()]
     print (json.dumps(scores))
+
+def main():
+
+    if 'request' not in form:
+        print("Missing request")
+    else:
+        request = str(form.getvalue('request'))
+        if request == 'top_scores':
+            print_highscores()
+
+if __name__ == "__main__":
+    main()
