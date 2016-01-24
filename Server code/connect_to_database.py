@@ -6,7 +6,7 @@ import pymysql
 
 cgitb.enable()
 
-""" This module contains a function that connects to the high_scores database."""
+""" connect_to_database.py contains a function that connects to the high_scores database."""
 
 def connect():
     """
