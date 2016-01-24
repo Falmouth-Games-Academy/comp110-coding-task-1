@@ -23,3 +23,18 @@ def add_score_player():
     c.execute(add_player_score, new_score)
 
     conn.commit()
+    
+'''
+The main gets request from form then displays appropriate text or error.
+'''
+def main():
+
+    if 'request' not in form:
+        print("Missing request")
+    else:
+        request = str(form.getvalue('request'))
+        if request == 'add_players_score':
+            add_score_player()
+
+if __name__ == "__main__":
+    main()
