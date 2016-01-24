@@ -32,3 +32,18 @@ def update_score():
 
     conn.commit()
     print("Score updated")
+    
+'''
+The main gets request from form then displays appropriate text or error.
+'''
+def main():
+
+    if 'request' not in form:
+        print("Missing request")
+    else:
+        request = str(form.getvalue('request'))
+        if request == 'update_score':
+            update_score()
+
+if __name__ == "__main__":
+    main()
