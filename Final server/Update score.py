@@ -1,3 +1,18 @@
+#!/usr/bin/python
+
+# Turn on debug mode.
+import cgitb
+import pymysql
+import json
+
+cgitb.enable()
+
+# Print necessary headers.
+print("Content-Type: text/html; charset=utf-8\n\n")
+
+import cgi
+form = cgi.FieldStorage()
+
 def update_score():
     first_name = str(form.getvalue('first_name'))
     last_name = str(form.getvalue('last_name'))
