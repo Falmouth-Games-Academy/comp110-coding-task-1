@@ -17,7 +17,6 @@ class TestApp(App):
         return layout
 
     def got_database(self, request, results):
-        for n in 
         self.label.text = results
 
     def callback(self, event):
