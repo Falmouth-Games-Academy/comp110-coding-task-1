@@ -27,3 +27,18 @@ def update_player():
 
     conn.commit()
     print ("Name updated")
+    
+'''
+The main gets request from form then displays appropriate text or error.
+'''
+def main():
+
+    if 'request' not in form:
+        print("Missing request")
+    else:
+        request = str(form.getvalue('request'))
+        if request == 'update_player':
+            update_player()
+
+if __name__ == "__main__":
+    main()
