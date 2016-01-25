@@ -1,0 +1,191 @@
+#sign in
+mysql - u root -p
+#enter password
+
+show databases;
+
+use example;
+
+shows tables;
+
+show numbers;
+
+show users;
+
+show tables;
+
+#################################################################################
+
+CREATE TABLE levels
+(
+id INT,
+level_name VARCHAR(30)
+);
+
+CREATE TABLE scores
+(
+player_id INT,
+level_id INT,
+score INT
+);
+
+###################################################################################
+
+#Insert new users
+
+CREATE TABLE players
+(
+id INT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(30),
+last_name VARCHAR(30),
+PRIMARY KEY(ID)
+);
+
+describe players;
+
+SELECT * FROM players;
+
+INSERT INTO players VALUES
+(
+null,
+'Doug'
+'Brown'
+);
+
+SELECT * FROM players;
+
+describe levels;
+
+ALTER TABLE levels
+ADD PRIMARY KEY(id);
+
+ALTER TABLE scores
+ADD PRIMARY KEY(player_id, level_id);
+
+describe scores;
+
+ALTER TABLE levels
+MODIFY COLUMN id INT NOT NULL AUTO_INCREMEMNT;
+
+describe levels;
+
+INSERT INTO scores VALUES
+(
+1,
+1,
+100
+);
+
+INSERT INTO scores VALUES ( 1,2, 300);
+
+SELECT * FROM scores;
+
+SELECT first_name, last_name FROM players WHERE id = '1';
+
+SELECT players.first_name, levels.level_name, scores.score
+FROM scores
+INNER JOIN players
+ON player_id = players.id
+INNER JOIN levels
+ON level_id = levels.id;
+
+SELECT * FROM scores;
+
+UPDATE scores
+SET scores = 400
+WHERE player_id = 1 AND level_id = 1;
+
+SELECT * FROM scores;
+
+SELECT players.first_name, levels.level_name, scores.score 
+FROM scores
+INNER JOIN players
+ON player_id
+INNER JOIN levels
+ON level_id = levels.id;
+
+#############################################################################
+
+#test for highscore of top 10 scores
+
+SELECT player.first_name, player.last_name, scores.score
+FROM scores
+#how to I arrange and update player.id to be whos score is highest
+WHERE player.id <= 10
+ORDER BY score;
+
+###############################################################################
+
+#!/usr/bin/python
+
+#Turn on debug mode.
+import cgitb
+cgitb.enable()
+
+#Print necessary headers.
+print("Content-Type: text/html; charset=utf-8\n\n")
+
+#Connect to the database.
+import cgi
+form = cgi.FieldStorage()
+if "user" not in form:
+  print ("Something Went Wrong")
+else
+  print("<b>Hello " + str(form.getvalue("user")) + "<b>")
+  my_first_int = 1
+  my_first_str = str(form.getvalue("user"))
+  
+#Connect to the database.
+import pymysql
+conn = pymysql.connect(
+  db = 'example',
+  user = 'root'
+  passwd = 'password' #changed this incase it matter
+  host = 'localhost')
+c = conn.cursor()
+
+#Insert some example data - Having some problem with this as my database says there is an error.
+c.execute("INSERT INTO example VALUES (" + my_first_int _ ", ' " + my_first_str + "', 'Users')")
+c.execute("INSERT INTO example VALUES (2, 'Two!')")
+
+#Get some example data
+sql = "SELECT 'first_name', 'last_name', 'score' 
+FROM scores 
+ORDER BY scores DESC
+LIMIT 0, 10"
+
+
+c.execute(sql, ("url.ac.uk",))
+results = c.fetchall()
+print(result)
+
+connection.close()
+
+#########################################################################
+
+#https://scriptingmysql.wordpress.com/2011/09/09/retrieving-data-from-mysql-via-python/
+
+import MySQLdb
+import sys
+
+cursor = connection.cursor ()
+cursor.execute (select first_name, last_name from scores")
+
+data = cursor.fetchall ()
+print row[0], row[1]
+cursor.close ()
+connection.close ()
+sys.exit ()
+
+######################################################################################################
+
+#test json - NOT WORKING
+#Highscore
+import json
+
+cursor.execute("""
+  SELECT player.first_name, player.last_name, scores.score
+  FROM scores
+  """)
+
+print json.dump(scores)
